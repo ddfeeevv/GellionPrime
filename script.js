@@ -229,81 +229,155 @@ function callPhone() {
     window.open('tel:+998909357769', '_self');
 }
 
-// Download commercial proposal
+// Download commercial proposal as image
 function downloadProposal() {
-    // Create a simple PDF-like content for the commercial proposal
-    const proposalContent = `
-КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ
-
-ООО "Gellion Prime"
-Таможенное оформление и регистрация контрактов
-
-КОНТАКТНАЯ ИНФОРМАЦИЯ:
-Телефон: +998 90 935-77-69
-Telegram: @GELLION_PRIME
-Email: gellionprimecastoms@gmail.com
-Режим работы: Ежедневно 10:00 - 23:00
-
-НАШИ УСЛУГИ:
-
-1. ТАМОЖЕННОЕ ОФОРМЛЕНИЕ
-   • Во всех режимах (импорт, экспорт, транзит, временный ввоз/вывоз, переработка, реэкспорт)
-   • От 2 часов до завершения
-
-2. ПОДБОР КОДА ТН ВЭД
-   • Расчёт платежей — обоснование, оценка рисков
-   • Консультации по тарифам и нетарифным мерам
-
-3. КОНТРАКТЫ
-   • Подготовка и регистрация в ЕЭИСВО
-   • Ведение и исправление ошибок
-   • Внесение изменений
-
-4. СЕРТИФИКАЦИЯ
-   • Подача заявки через singlewindow.uz
-   • Выбор органа сертификации
-   • Анализ груза: «а нужен ли вам сертификат?»
-
-5. СОПРОВОЖДЕНИЕ ДОСМОТРА
-   • При таможенном досмотре
-   • Предрейсовый аудит документов
-
-ПОЧЕМУ ВЫБИРАЮТ НАС:
-• 18+ лет опыта в таможенной сфере
-• 1000+ успешных сделок
-• 24/7 поддержка клиентов
-• Члены Ассоциации таможенных брокеров Узбекистана
-• Выездной специалист или удаленное сопровождение
-
-ГИБКАЯ ЦЕНОВАЯ ПОЛИТИКА:
-Мы подберем оптимальные условия для вашего бизнеса.
-
-СВЯЖИТЕСЬ С НАМИ:
-Будем рады сотрудничеству!
-
-ООО "Gellion Prime"
-Toshkent shahri, Mirobod tumani
-ИНН: 307235310
-ОКЭД: 52292
-    `;
+    // Create canvas for the commercial proposal image
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
     
-    // Create a blob with the content
-    const blob = new Blob([proposalContent], { type: 'text/plain;charset=utf-8' });
+    // Set canvas size
+    canvas.width = 800;
+    canvas.height = 1200;
     
-    // Create download link
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Gellion_Prime_Коммерческое_предложение.txt';
-    document.body.appendChild(a);
-    a.click();
+    // Background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     
-    // Cleanup
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
+    // Logo colors
+    const orange = '#ff6b35';
+    const blue = '#1e3a8a';
     
-    // Show success notification
-    showNotification('Коммерческое предложение скачано!', 'success');
+    // Title
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 32px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ', canvas.width/2, 60);
+    
+    // Company name
+    ctx.fillStyle = orange;
+    ctx.font = 'bold 24px Arial';
+    ctx.fillText('ООО "Gellion Prime"', canvas.width/2, 100);
+    ctx.fillStyle = blue;
+    ctx.font = '18px Arial';
+    ctx.fillText('Таможенное оформление и регистрация контрактов', canvas.width/2, 130);
+    
+    // Contact info
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 20px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText('КОНТАКТНАЯ ИНФОРМАЦИЯ:', 50, 180);
+    
+    ctx.font = '16px Arial';
+    ctx.fillText('Телефон: +998 90 935-77-69', 50, 210);
+    ctx.fillText('Telegram: @GELLION_PRIME', 50, 235);
+    ctx.fillText('Email: gellionprimecustoms@gmail.com', 50, 260);
+    ctx.fillText('Режим работы: Ежедневно 10:00 - 23:00', 50, 285);
+    
+    // Services
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 20px Arial';
+    ctx.fillText('НАШИ УСЛУГИ:', 50, 330);
+    
+    ctx.font = '16px Arial';
+    let y = 360;
+    
+    const services = [
+        '1. ТАМОЖЕННОЕ ОФОРМЛЕНИЕ',
+        '   • Во всех режимах (импорт, экспорт, транзит, временный ввоз/вывоз, переработка, реэкспорт)',
+        '   • От 2 часов до завершения',
+        '',
+        '2. ПОДБОР КОДА ТН ВЭД',
+        '   • Расчёт платежей — обоснование, оценка рисков',
+        '   • Консультации по тарифам и нетарифным мерам',
+        '',
+        '3. КОНТРАКТЫ',
+        '   • Подготовка и регистрация в ЕЭИСВО',
+        '   • Ведение и исправление ошибок',
+        '   • Внесение изменений',
+        '',
+        '4. СЕРТИФИКАЦИЯ',
+        '   • Подача заявки через singlewindow.uz',
+        '   • Выбор органа сертификации',
+        '   • Анализ груза: «а нужен ли вам сертификат?»',
+        '',
+        '5. СОПРОВОЖДЕНИЕ ДОСМОТРА',
+        '   • При таможенном досмотре',
+        '   • Предрейсовый аудит документов'
+    ];
+    
+    services.forEach(line => {
+        if (line.startsWith('•')) {
+            ctx.fillStyle = '#666';
+        } else if (line.match(/^\d+\./)) {
+            ctx.fillStyle = orange;
+            ctx.font = 'bold 16px Arial';
+        } else {
+            ctx.fillStyle = blue;
+            ctx.font = '16px Arial';
+        }
+        ctx.fillText(line, 50, y);
+        y += 25;
+    });
+    
+    // Why choose us
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 20px Arial';
+    ctx.fillText('ПОЧЕМУ ВЫБИРАЮТ НАС:', 50, y + 30);
+    
+    ctx.font = '16px Arial';
+    y += 60;
+    
+    const advantages = [
+        '• 18+ лет опыта в таможенной сфере',
+        '• 1000+ успешных сделок',
+        '• 24/7 поддержка клиентов',
+        '• Члены Ассоциации таможенных брокеров Узбекистана',
+        '• Выездной специалист или удаленное сопровождение'
+    ];
+    
+    advantages.forEach(line => {
+        ctx.fillStyle = '#666';
+        ctx.fillText(line, 50, y);
+        y += 25;
+    });
+    
+    // Footer
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 18px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('ГИБКАЯ ЦЕНОВАЯ ПОЛИТИКА', canvas.width/2, y + 40);
+    ctx.font = '16px Arial';
+    ctx.fillText('Мы подберем оптимальные условия для вашего бизнеса', canvas.width/2, y + 65);
+    
+    ctx.fillStyle = orange;
+    ctx.font = 'bold 20px Arial';
+    ctx.fillText('СВЯЖИТЕСЬ С НАМИ!', canvas.width/2, y + 100);
+    ctx.font = '16px Arial';
+    ctx.fillText('Будем рады сотрудничеству!', canvas.width/2, y + 125);
+    
+    // Company details
+    ctx.fillStyle = blue;
+    ctx.font = '14px Arial';
+    ctx.fillText('ООО "Gellion Prime"', canvas.width/2, y + 160);
+    ctx.fillText('Toshkent shahri, Mirobod tumani', canvas.width/2, y + 180);
+    ctx.fillText('ИНН: 307235310 | ОКЭД: 52292', canvas.width/2, y + 200);
+    
+    // Convert canvas to blob and download
+    canvas.toBlob(function(blob) {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Gellion_Prime_Коммерческое_предложение.png';
+        document.body.appendChild(a);
+        a.click();
+        
+        // Cleanup
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        // Show success notification
+        showNotification('Коммерческое предложение скачано!', 'success');
+    }, 'image/png');
 }
 
 // Notification system

@@ -51,6 +51,22 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+.logo-gellion {
+    color: #1e3a8a;
+}
+
+.logo-prime {
+    color: #ff6b35;
 }
 
 .logo-symbol {
