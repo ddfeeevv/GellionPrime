@@ -812,10 +812,12 @@ body {
     
     .thank-you-buttons {
         flex-direction: column;
+        align-items: center;
     }
     
     .thank-you-buttons .btn {
         width: 100%;
+        max-width: 300px;
     }
 }
 
