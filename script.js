@@ -90,9 +90,72 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Uzbek phone number validation
+function validateUzbekPhone(phone) {
+    // Remove all non-digit characters except +
+    const cleanPhone = phone.replace(/[^\d+]/g, '');
+    
+    // Check if it starts with +998
+    if (!cleanPhone.startsWith('+998')) {
+        return false;
+    }
+    
+    // Check if it has the correct length (12 digits after +998)
+    if (cleanPhone.length !== 13) {
+        return false;
+    }
+    
+    // Check if the operator code is valid (90, 91, 93, 94, 95, 97, 99)
+    const operatorCode = cleanPhone.substring(4, 6);
+    const validOperators = ['90', '91', '93', '94', '95', '97', '99'];
+    
+    if (!validOperators.includes(operatorCode)) {
+        return false;
+    }
+    
+    return true;
+}
+
+// Format phone number as user types
+function formatPhoneNumber(input) {
+    let value = input.value.replace(/\D/g, '');
+    
+    if (value.startsWith('998')) {
+        value = '+' + value;
+    } else if (value.startsWith('8')) {
+        value = '+998' + value.substring(1);
+    } else if (value.length > 0 && !value.startsWith('998')) {
+        value = '+998' + value;
+    }
+    
+    // Format as +998 xx xxx xx xx
+    if (value.length > 4) {
+        value = value.substring(0, 4) + ' ' + value.substring(4);
+    }
+    if (value.length > 8) {
+        value = value.substring(0, 8) + ' ' + value.substring(8);
+    }
+    if (value.length > 12) {
+        value = value.substring(0, 12) + ' ' + value.substring(12);
+    }
+    if (value.length > 16) {
+        value = value.substring(0, 16) + ' ' + value.substring(16);
+    }
+    
+    input.value = value;
+}
+
 // Contact form handling
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
+    const phoneInput = document.getElementById('phone');
+    
+    // Add phone formatting
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function() {
+            formatPhoneNumber(this);
+        });
+    }
     
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -111,10 +174,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
             
-            // Phone validation
-            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
-            if (!phoneRegex.test(phone)) {
-                const errorMsg = currentLang === 'uz' ? 'Iltimos, to\'g\'ri telefon raqamini kiriting' : 'Пожалуйста, введите корректный номер телефона';
+            // Uzbek phone validation
+            if (!validateUzbekPhone(phone)) {
+                const errorMsg = currentLang === 'uz' ? 'Iltimos, to\'g\'ri O\'zbekiston telefon raqamini kiriting (+998 xx xxx xx xx)' : 'Пожалуйста, введите корректный узбекский номер телефона (+998 xx xxx xx xx)';
                 showNotification(errorMsg, 'error');
                 return;
             }
