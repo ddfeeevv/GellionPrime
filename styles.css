@@ -53,8 +53,9 @@ body {
 }
 
 .logo-image {
-    height: 50px;
+    height: 40px;
     width: auto;
+    max-width: 150px;
 }
 
 
