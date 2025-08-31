@@ -229,6 +229,83 @@ function callPhone() {
     window.open('tel:+998909357769', '_self');
 }
 
+// Download commercial proposal
+function downloadProposal() {
+    // Create a simple PDF-like content for the commercial proposal
+    const proposalContent = `
+КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ
+
+ООО "Gellion Prime"
+Таможенное оформление и регистрация контрактов
+
+КОНТАКТНАЯ ИНФОРМАЦИЯ:
+Телефон: +998 90 935-77-69
+Telegram: @GELLION_PRIME
+Email: gellionprimecastoms@gmail.com
+Режим работы: Ежедневно 10:00 - 23:00
+
+НАШИ УСЛУГИ:
+
+1. ТАМОЖЕННОЕ ОФОРМЛЕНИЕ
+   • Во всех режимах (импорт, экспорт, транзит, временный ввоз/вывоз, переработка, реэкспорт)
+   • От 2 часов до завершения
+
+2. ПОДБОР КОДА ТН ВЭД
+   • Расчёт платежей — обоснование, оценка рисков
+   • Консультации по тарифам и нетарифным мерам
+
+3. КОНТРАКТЫ
+   • Подготовка и регистрация в ЕЭИСВО
+   • Ведение и исправление ошибок
+   • Внесение изменений
+
+4. СЕРТИФИКАЦИЯ
+   • Подача заявки через singlewindow.uz
+   • Выбор органа сертификации
+   • Анализ груза: «а нужен ли вам сертификат?»
+
+5. СОПРОВОЖДЕНИЕ ДОСМОТРА
+   • При таможенном досмотре
+   • Предрейсовый аудит документов
+
+ПОЧЕМУ ВЫБИРАЮТ НАС:
+• 18+ лет опыта в таможенной сфере
+• 1000+ успешных сделок
+• 24/7 поддержка клиентов
+• Члены Ассоциации таможенных брокеров Узбекистана
+• Выездной специалист или удаленное сопровождение
+
+ГИБКАЯ ЦЕНОВАЯ ПОЛИТИКА:
+Мы подберем оптимальные условия для вашего бизнеса.
+
+СВЯЖИТЕСЬ С НАМИ:
+Будем рады сотрудничеству!
+
+ООО "Gellion Prime"
+Toshkent shahri, Mirobod tumani
+ИНН: 307235310
+ОКЭД: 52292
+    `;
+    
+    // Create a blob with the content
+    const blob = new Blob([proposalContent], { type: 'text/plain;charset=utf-8' });
+    
+    // Create download link
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Gellion_Prime_Коммерческое_предложение.txt';
+    document.body.appendChild(a);
+    a.click();
+    
+    // Cleanup
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    
+    // Show success notification
+    showNotification('Коммерческое предложение скачано!', 'success');
+}
+
 // Notification system
 function showNotification(message, type = 'info') {
     // Remove existing notifications
