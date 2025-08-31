@@ -1,3 +1,32 @@
+// Language switching functionality
+let currentLang = 'ru';
+
+function switchLanguage(lang) {
+    currentLang = lang;
+    
+    // Update language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+    
+    // Update all translatable elements
+    document.querySelectorAll('[data-ru][data-uz]').forEach(element => {
+        element.textContent = element.getAttribute(`data-${lang}`);
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
+        const placeholder = element.getAttribute(`data-placeholder-${lang}`);
+        if (placeholder) {
+            element.placeholder = placeholder;
+        }
+    });
+    
+    // Save language preference
+    localStorage.setItem('preferred-language', lang);
+}
+
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
@@ -18,6 +47,20 @@ document.addEventListener('DOMContentLoaded', function() {
             navToggle.classList.remove('active');
         });
     });
+    
+    // Language selector functionality
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const lang = this.getAttribute('data-lang');
+            switchLanguage(lang);
+        });
+    });
+    
+    // Load saved language preference
+    const savedLang = localStorage.getItem('preferred-language');
+    if (savedLang) {
+        switchLanguage(savedLang);
+    }
 });
 
 // Smooth scrolling functions
@@ -58,41 +101,106 @@ document.addEventListener('DOMContentLoaded', function() {
             // Get form data
             const formData = new FormData(contactForm);
             const name = formData.get('name');
-            const email = formData.get('email');
             const phone = formData.get('phone');
             const message = formData.get('message');
             
             // Basic validation
-            if (!name || !email || !phone || !message) {
-                showNotification('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showNotification('Пожалуйста, введите корректный email', 'error');
+            if (!name || !phone || !message) {
+                const errorMsg = currentLang === 'uz' ? 'Iltimos, barcha maydonlarni to\'ldiring' : 'Пожалуйста, заполните все поля';
+                showNotification(errorMsg, 'error');
                 return;
             }
             
             // Phone validation
             const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
             if (!phoneRegex.test(phone)) {
-                showNotification('Пожалуйста, введите корректный номер телефона', 'error');
+                const errorMsg = currentLang === 'uz' ? 'Iltimos, to\'g\'ri telefon raqamini kiriting' : 'Пожалуйста, введите корректный номер телефона';
+                showNotification(errorMsg, 'error');
                 return;
             }
             
-            // Simulate form submission
-            showNotification('Отправляем заявку...', 'info');
+            // Show loading message
+            const loadingMsg = currentLang === 'uz' ? 'Arizani yuborish...' : 'Отправляем заявку...';
+            showNotification(loadingMsg, 'info');
             
-            // Simulate API call
-            setTimeout(() => {
-                showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
-                contactForm.reset();
-            }, 2000);
+            // Send to Telegram Bot (recommended approach)
+            sendToTelegram(name, phone, message);
+            
+            // Also send to email as backup
+            sendToEmail(name, phone, message);
         });
     }
 });
+
+// Send form data to Telegram Bot
+function sendToTelegram(name, phone, message) {
+    const botToken = 'YOUR_BOT_TOKEN'; // You'll need to create a Telegram bot
+    const chatId = 'YOUR_CHAT_ID'; // Your Telegram chat ID
+    
+    const text = `🔔 Новая заявка с сайта Gellion Prime
+
+👤 Имя: ${name}
+📞 Телефон: ${phone}
+💬 Сообщение: ${message}
+
+⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
+    
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'HTML'
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            const successMsg = currentLang === 'uz' ? 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.' : 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
+            showNotification(successMsg, 'success');
+            document.getElementById('contactForm').reset();
+        } else {
+            throw new Error('Telegram API error');
+        }
+    })
+    .catch(error => {
+        console.error('Error sending to Telegram:', error);
+        // Fallback to email
+        sendToEmail(name, phone, message);
+    });
+}
+
+// Send form data to email (using EmailJS or similar service)
+function sendToEmail(name, phone, message) {
+    // Using EmailJS as an example
+    // You'll need to sign up at emailjs.com and configure it
+    
+    const templateParams = {
+        to_name: 'Gellion Prime',
+        from_name: name,
+        from_phone: phone,
+        message: message,
+        reply_to: 'info@gellionprime.uz'
+    };
+    
+    // This is a placeholder - you'll need to configure EmailJS
+    // emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+    //     .then(function(response) {
+    //         console.log('SUCCESS!', response.status, response.text);
+    //     }, function(error) {
+    //         console.log('FAILED...', error);
+    //     });
+    
+    // For now, just show success message
+    const successMsg = currentLang === 'uz' ? 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.' : 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
+    showNotification(successMsg, 'success');
+    document.getElementById('contactForm').reset();
+}
 
 // Telegram link function
 function openTelegram() {

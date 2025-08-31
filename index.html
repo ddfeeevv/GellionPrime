@@ -15,16 +15,25 @@
         <nav class="navbar">
             <div class="container">
                 <div class="nav-brand">
-                    <i class="fas fa-shipping-fast"></i>
-                    <span>Gellion Prime</span>
+                    <div class="logo">
+                        <div class="logo-symbol">
+                            <div class="logo-part orange"></div>
+                            <div class="logo-part blue"></div>
+                        </div>
+                        <span>Gellion Prime</span>
+                    </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#home">Главная</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#process">Процесс</a></li>
-                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="#home" data-ru="Главная" data-uz="Bosh sahifa">Главная</a></li>
+                    <li><a href="#services" data-ru="Услуги" data-uz="Xizmatlar">Услуги</a></li>
+                    <li><a href="#about" data-ru="О нас" data-uz="Biz haqida">О нас</a></li>
+                    <li><a href="#process" data-ru="Процесс" data-uz="Jarayon">Процесс</a></li>
+                    <li><a href="#contact" data-ru="Контакты" data-uz="Aloqa">Контакты</a></li>
                 </ul>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="ru">RU</button>
+                    <button class="lang-btn" data-lang="uz">UZ</button>
+                </div>
                 <div class="nav-toggle">
                     <span></span>
                     <span></span>
@@ -38,8 +47,8 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Таможенное оформление и регистрация контрактов</h1>
-                <p>Профессиональные услуги с 2007 года. Быстрое оформление, регистрация контрактов, заявки на сертификацию. Цените время, доверяя опыту!</p>
+                <h1 data-ru="Таможенное оформление и регистрация контрактов" data-uz="Bojxona rasmiylashtirish va shartnomalarni ro'yxatdan o'tkazish">Таможенное оформление и регистрация контрактов</h1>
+                <p data-ru="Профессиональные услуги с 2007 года. Быстрое оформление, регистрация контрактов, заявки на сертификацию. Цените время, доверяя опыту!" data-uz="2007 yildan beri professional xizmatlar. Tez rasmiylashtirish, shartnomalarni ro'yxatdan o'tkazish, sertifikatlash uchun arizalar. Vaqtingizni qadrlang, tajribaga ishonib!">Профессиональные услуги с 2007 года. Быстрое оформление, регистрация контрактов, заявки на сертификацию. Цените время, доверяя опыту!</p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" onclick="scrollToContact()">Получить консультацию</button>
                     <button class="btn btn-secondary" onclick="scrollToServices()">Наши услуги</button>
@@ -50,15 +59,15 @@
                     <div class="card-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Быстрое оформление</h3>
-                    <p>От 2 часов до 1 дня</p>
+                    <h3 data-ru="Быстрое оформление" data-uz="Tez rasmiylashtirish">Быстрое оформление</h3>
+                    <p data-ru="От 2 часов до 1 дня" data-uz="2 soatdan 1 kungacha">От 2 часов до 1 дня</p>
                 </div>
                 <div class="hero-card">
                     <div class="card-icon">
                         <i class="fas fa-award"></i>
                     </div>
-                    <h3>18 лет опыта</h3>
-                    <p>С 2007 года в сфере</p>
+                    <h3 data-ru="18 лет опыта" data-uz="18 yillik tajriba">18 лет опыта</h3>
+                    <p data-ru="С 2007 года в сфере" data-uz="2007 yildan beri sohada">С 2007 года в сфере</p>
                 </div>
             </div>
         </div>
@@ -68,51 +77,51 @@
     <section id="services" class="services">
         <div class="container">
             <div class="section-header">
-                <h2>Наши услуги</h2>
-                <p>Полный спектр таможенных услуг для вашего бизнеса</p>
+                <h2 data-ru="Наши услуги" data-uz="Bizning xizmatlar">Наши услуги</h2>
+                <p data-ru="Полный спектр таможенных услуг для вашего бизнеса" data-uz="Biznesingiz uchun bojxona xizmatlarining to'liq spektri">Полный спектр таможенных услуг для вашего бизнеса</p>
             </div>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-file-contract"></i>
                     </div>
-                    <h3>Таможенное оформление</h3>
-                    <p>Полное сопровождение процедур таможенного оформления грузов с подготовкой всех необходимых документов.</p>
+                    <h3 data-ru="Регистрация контрактов в ЕЭИСВО" data-uz="EEISVO tizimida shartnomalarni ro'yxatdan o'tkazish">Регистрация контрактов в ЕЭИСВО</h3>
+                    <p data-ru="Полное сопровождение регистрации внешнеторговых контрактов в системе ЕЭИСВО Узбекистана" data-uz="O'zbekiston EEISVO tizimida tashqi savdo shartnomalarini ro'yxatdan o'tkazishda to'liq hamrohlik">Полное сопровождение регистрации внешнеторговых контрактов в системе ЕЭИСВО Узбекистана</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-file-signature"></i>
                     </div>
-                    <h3>Регистрация контрактов</h3>
-                    <p>Быстрая и профессиональная регистрация внешнеторговых контрактов в банках и таможенных органах.</p>
+                    <h3 data-ru="Составление документов" data-uz="Hujjatlarni tayyorlash">Составление документов</h3>
+                    <p data-ru="Составление контрактов, дополнительных соглашений, актов выполненных работ и спецификаций" data-uz="Shartnomalar, qo'shimcha kelishuvlar, bajarilgan ishlar aktlari va spetsifikatsiyalarni tayyorlash">Составление контрактов, дополнительных соглашений, актов выполненных работ и спецификаций</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-certificate"></i>
                     </div>
-                    <h3>Заявки на сертификацию</h3>
-                    <p>Помощь в получении сертификатов соответствия и других разрешительных документов.</p>
+                    <h3 data-ru="Таможенное оформление" data-uz="Bojxona rasmiylashtirish">Таможенное оформление</h3>
+                    <p data-ru="Подготовка и подача деклараций, оформление сертификатов, представление интересов в таможенных органах" data-uz="Deklaratsiyalarni tayyorlash va topshirish, sertifikatlarni rasmiylashtirish, bojxona organlarida manfaatlarni himoya qilish">Подготовка и подача деклараций, оформление сертификатов, представление интересов в таможенных органах</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-calculator"></i>
                     </div>
-                    <h3>Расчет пошлин</h3>
-                    <p>Точный расчет таможенных пошлин, налогов и сборов с учетом всех льгот и преференций.</p>
+                    <h3 data-ru="Консультации по ВЭД" data-uz="Tashqi iqtisodiy faoliyat bo'yicha maslahatlar">Консультации по ВЭД</h3>
+                    <p data-ru="Бесплатная помощь в подготовке документов, консультации по тарифам и нетарифным мерам регулирования" data-uz="Hujjatlarni tayyorlashda bepul yordam, tariflar va no-tarif tartibga solish choralari bo'yicha maslahatlar">Бесплатная помощь в подготовке документов, консультации по тарифам и нетарифным мерам регулирования</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-gavel"></i>
+                        <i class="fas fa-user-tie"></i>
                     </div>
-                    <h3>Правовая поддержка</h3>
-                    <p>Консультации по таможенному законодательству и защита интересов в таможенных спорах.</p>
+                    <h3 data-ru="Специалист с выездом" data-uz="Sayohatda mutaxassis">Специалист с выездом</h3>
+                    <p data-ru="Наш специалист приедет к вам в офис для консультаций и выполнения всех необходимых процедур" data-uz="Bizning mutaxassis maslahatlar va barcha zarur protseduralarni bajarish uchun ofisingizga keladi">Наш специалист приедет к вам в офис для консультаций и выполнения всех необходимых процедур</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-clock"></i>
                     </div>
-                    <h3>Работаем каждый день</h3>
-                    <p>С 10:00 до 23:00 без выходных. Быстрая реакция на ваши запросы в любое время.</p>
+                    <h3 data-ru="Работаем каждый день" data-uz="Har kuni ishlaymiz">Работаем каждый день</h3>
+                    <p data-ru="С 10:00 до 23:00 без выходных. Быстрая реакция на ваши запросы в любое время" data-uz="10:00 dan 23:00 gacha dam olish kunlarisiz. Har qanday vaqtda so'rovlaringizga tez javob">С 10:00 до 23:00 без выходных. Быстрая реакция на ваши запросы в любое время</p>
                 </div>
             </div>
         </div>
@@ -123,20 +132,20 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>О компании Gellion Prime</h2>
-                    <p>Мы - команда профессионалов с 2007 года в сфере таможенного оформления. Наша миссия - сделать процесс таможенных процедур максимально простым и эффективным для наших клиентов. Цените время, доверяя опыту!</p>
+                    <h2 data-ru="О компании Gellion Prime" data-uz="Gellion Prime kompaniyasi haqida">О компании Gellion Prime</h2>
+                    <p data-ru="Мы - команда профессионалов с 2007 года в сфере таможенного оформления и регистрации контрактов. Наша миссия - сделать процесс таможенных процедур максимально простым и эффективным для наших клиентов. Цените время, доверяя опыту!" data-uz="Biz - 2007 yildan beri bojxona rasmiylashtirish va shartnomalarni ro'yxatdan o'tkazish sohasida professional jamoa. Bizning vazifamiz - bojxona protseduralarini mijozlarimiz uchun imkon qadar oddiy va samarali qilish. Vaqtingizni qadrlang, tajribaga ishonib!">Мы - команда профессионалов с 2007 года в сфере таможенного оформления и регистрации контрактов. Наша миссия - сделать процесс таможенных процедур максимально простым и эффективным для наших клиентов. Цените время, доверяя опыту!</p>
                     <div class="stats">
                         <div class="stat-item">
-                            <h3>16+</h3>
-                            <p>Лет опыта</p>
+                            <h3>18+</h3>
+                            <p data-ru="Лет опыта" data-uz="Yillik tajriba">Лет опыта</p>
                         </div>
                         <div class="stat-item">
                             <h3>1000+</h3>
-                            <p>Успешных сделок</p>
+                            <p data-ru="Успешных сделок" data-uz="Muvaffaqiyatli bitimlar">Успешных сделок</p>
                         </div>
                         <div class="stat-item">
                             <h3>13ч</h3>
-                            <p>Рабочий день</p>
+                            <p data-ru="Рабочий день" data-uz="Ish kuni">Рабочий день</p>
                         </div>
                     </div>
                 </div>
@@ -203,7 +212,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div>
-                            <h3>Телефон</h3>
+                            <h3 data-ru="Телефон" data-uz="Telefon">Телефон</h3>
                             <p>+998 90 935-77-69</p>
                         </div>
                     </div>
@@ -221,8 +230,8 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div>
-                            <h3>Режим работы</h3>
-                            <p>Ежедневно: 10:00 - 23:00</p>
+                            <h3 data-ru="Режим работы" data-uz="Ish rejimi">Режим работы</h3>
+                            <p data-ru="Ежедневно: 10:00 - 23:00" data-uz="Har kuni: 10:00 - 23:00">Ежедневно: 10:00 - 23:00</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -230,8 +239,8 @@
                             <i class="fas fa-award"></i>
                         </div>
                         <div>
-                            <h3>Опыт</h3>
-                            <p>16 лет в таможенной сфере</p>
+                            <h3 data-ru="Опыт" data-uz="Tajriba">Опыт</h3>
+                            <p data-ru="18 лет в таможенной сфере" data-uz="Bojxona sohasida 18 yil">18 лет в таможенной сфере</p>
                         </div>
                     </div>
                 </div>
@@ -240,15 +249,12 @@
                         <input type="text" id="name" name="name" placeholder="Ваше имя" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-group">
                         <input type="tel" id="phone" name="phone" placeholder="Телефон" required>
                     </div>
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Ваше сообщение" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                    <button type="submit" class="btn btn-primary" data-ru="Отправить заявку" data-uz="Arizani yuborish">Отправить заявку</button>
                 </form>
             </div>
         </div>
@@ -284,7 +290,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Gellion Prime. Все права защищены.</p>
+                <p>&copy; 2025 Gellion Prime. Все права защищены.</p>
             </div>
         </div>
     </footer>
