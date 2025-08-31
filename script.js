@@ -229,7 +229,7 @@ function callPhone() {
     window.open('tel:+998909357769', '_self');
 }
 
-// Download commercial proposal as image
+// Download commercial proposal as image - exact replica of the provided design
 function downloadProposal() {
     // Create canvas for the commercial proposal image
     const canvas = document.createElement('canvas');
@@ -237,7 +237,7 @@ function downloadProposal() {
     
     // Set canvas size
     canvas.width = 800;
-    canvas.height = 1200;
+    canvas.height = 1400;
     
     // Background
     ctx.fillStyle = '#ffffff';
@@ -247,120 +247,170 @@ function downloadProposal() {
     const orange = '#ff6b35';
     const blue = '#1e3a8a';
     
-    // Title
-    ctx.fillStyle = blue;
-    ctx.font = 'bold 32px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('КОММЕРЧЕСКОЕ ПРЕДЛОЖЕНИЕ', canvas.width/2, 60);
+    // Draw logo at top left
+    function drawLogo(x, y, size) {
+        // Orange part (left)
+        ctx.fillStyle = orange;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + size * 0.7, y);
+        ctx.lineTo(x + size * 0.7, y + size * 0.3);
+        ctx.lineTo(x + size * 0.5, y + size * 0.7);
+        ctx.lineTo(x, y + size * 0.7);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Blue part (right)
+        ctx.fillStyle = blue;
+        ctx.beginPath();
+        ctx.moveTo(x + size * 0.3, y);
+        ctx.lineTo(x + size, y);
+        ctx.lineTo(x + size, y + size * 0.7);
+        ctx.lineTo(x + size * 0.5, y + size * 0.7);
+        ctx.lineTo(x + size * 0.3, y + size * 0.3);
+        ctx.closePath();
+        ctx.fill();
+    }
     
-    // Company name
-    ctx.fillStyle = orange;
+    // Draw logo
+    drawLogo(50, 30, 60);
+    
+    // Company name next to logo
+    ctx.fillStyle = blue;
     ctx.font = 'bold 24px Arial';
-    ctx.fillText('ООО "Gellion Prime"', canvas.width/2, 100);
-    ctx.fillStyle = blue;
-    ctx.font = '18px Arial';
-    ctx.fillText('Таможенное оформление и регистрация контрактов', canvas.width/2, 130);
-    
-    // Contact info
-    ctx.fillStyle = blue;
-    ctx.font = 'bold 20px Arial';
     ctx.textAlign = 'left';
-    ctx.fillText('КОНТАКТНАЯ ИНФОРМАЦИЯ:', 50, 180);
+    ctx.fillText('Gellion', 130, 50);
+    ctx.fillStyle = orange;
+    ctx.fillText('Prime', 130, 75);
     
+    // Tagline
+    ctx.fillStyle = orange;
     ctx.font = '16px Arial';
-    ctx.fillText('Телефон: +998 90 935-77-69', 50, 210);
-    ctx.fillText('Telegram: @GELLION_PRIME', 50, 235);
-    ctx.fillText('Email: gellionprimecustoms@gmail.com', 50, 260);
-    ctx.fillText('Режим работы: Ежедневно 10:00 - 23:00', 50, 285);
+    ctx.fillText('Цените время, доверяя опыту!', 130, 95);
     
-    // Services
+    // Contact info top right
     ctx.fillStyle = blue;
-    ctx.font = 'bold 20px Arial';
-    ctx.fillText('НАШИ УСЛУГИ:', 50, 330);
+    ctx.font = '14px Arial';
+    ctx.textAlign = 'right';
+    ctx.fillText('+998909357769', canvas.width - 50, 40);
+    ctx.fillText('+998977517479', canvas.width - 50, 60);
+    ctx.fillText('@GELLION_PRIME', canvas.width - 50, 80);
+    ctx.fillText('gellionprimecustoms@gmail.com', canvas.width - 50, 100);
+    
+    // Main heading
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 36px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText('ТАМОЖЕННОЕ ОФОРМЛЕНИЕ', canvas.width/2, 180);
+    ctx.fillText('БЕЗ СТРЕССА И ОЧЕРЕДЕЙ', canvas.width/2, 220);
+    
+    // Sub-heading
+    ctx.fillStyle = orange;
+    ctx.font = '18px Arial';
+    ctx.fillText('Вы занимаетесь импортом и экспортом? Вам не нужно разбираться в сложностях', canvas.width/2, 260);
+    ctx.fillText('таможенного оформления – мы возьмем все на себя!', canvas.width/2, 285);
+    
+    // Services section
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 24px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText('Наши услуги:', 50, 340);
     
     ctx.font = '16px Arial';
-    let y = 360;
+    let y = 380;
     
     const services = [
-        '1. ТАМОЖЕННОЕ ОФОРМЛЕНИЕ',
-        '   • Во всех режимах (импорт, экспорт, транзит, временный ввоз/вывоз, переработка, реэкспорт)',
-        '   • От 2 часов до завершения',
-        '',
-        '2. ПОДБОР КОДА ТН ВЭД',
-        '   • Расчёт платежей — обоснование, оценка рисков',
-        '   • Консультации по тарифам и нетарифным мерам',
-        '',
-        '3. КОНТРАКТЫ',
-        '   • Подготовка и регистрация в ЕЭИСВО',
-        '   • Ведение и исправление ошибок',
-        '   • Внесение изменений',
-        '',
-        '4. СЕРТИФИКАЦИЯ',
-        '   • Подача заявки через singlewindow.uz',
-        '   • Выбор органа сертификации',
-        '   • Анализ груза: «а нужен ли вам сертификат?»',
-        '',
-        '5. СОПРОВОЖДЕНИЕ ДОСМОТРА',
-        '   • При таможенном досмотре',
-        '   • Предрейсовый аудит документов'
+        '✓ Консультации по ВЭД – бесплатно',
+        '✓ Оформление и подача ГТД – быстро и без ошибок (от 2БРВ)',
+        '✓ Подача заявок на сертификацию через систему "Единое окно" и помощь в проведении сертификации (от 0,5БРВ)',
+        '✓ Подготовка и регистрация контрактов в ЕЭИСВО (от 0,5БРВ)',
+        '✓ Исправление ошибок в документах',
+        '✓ Организация и сопровождение таможенного досмотра'
     ];
     
     services.forEach(line => {
-        if (line.startsWith('•')) {
-            ctx.fillStyle = '#666';
-        } else if (line.match(/^\d+\./)) {
-            ctx.fillStyle = orange;
-            ctx.font = 'bold 16px Arial';
-        } else {
-            ctx.fillStyle = blue;
-            ctx.font = '16px Arial';
-        }
+        ctx.fillStyle = blue;
         ctx.fillText(line, 50, y);
-        y += 25;
+        y += 30;
+    });
+    
+    // Training section
+    y += 20;
+    ctx.fillStyle = blue;
+    ctx.font = 'bold 20px Arial';
+    ctx.fillText('Консультация и обучение персонала клиента:', 50, y);
+    
+    ctx.font = '16px Arial';
+    y += 30;
+    
+    const training = [
+        '✈ Помогаем вашим сотрудникам разбираться в ВЭД и таможенном оформлении',
+        '✈ Разбираем актуальные изменения в законодательстве',
+        '✈ Готовим вашу компанию к самостоятельному оформлению грузов',
+        '✈ Индивидуальный формат – подстраиваем обучение под ваш бизнес'
+    ];
+    
+    training.forEach(line => {
+        ctx.fillStyle = blue;
+        ctx.fillText(line, 50, y);
+        y += 30;
     });
     
     // Why choose us
+    y += 20;
     ctx.fillStyle = blue;
     ctx.font = 'bold 20px Arial';
-    ctx.fillText('ПОЧЕМУ ВЫБИРАЮТ НАС:', 50, y + 30);
+    ctx.fillText('Почему выбирают нас?', 50, y);
     
     ctx.font = '16px Arial';
-    y += 60;
+    y += 30;
     
     const advantages = [
-        '• 18+ лет опыта в таможенной сфере',
-        '• 1000+ успешных сделок',
-        '• 24/7 поддержка клиентов',
-        '• Члены Ассоциации таможенных брокеров Узбекистана',
-        '• Выездной специалист или удаленное сопровождение'
+        '✓ 20+ лет опыта в ВЭД',
+        '✓ Члены Ассоциации таможенных брокеров Узбекистана',
+        '✓ Мы всегда в курсе изменений в законодательстве',
+        '✓ Выездной специалист или удаленное сопровождение'
     ];
     
     advantages.forEach(line => {
-        ctx.fillStyle = '#666';
+        ctx.fillStyle = blue;
         ctx.fillText(line, 50, y);
-        y += 25;
+        y += 30;
     });
     
-    // Footer
+    // Pricing policy
+    y += 20;
     ctx.fillStyle = blue;
-    ctx.font = 'bold 18px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('ГИБКАЯ ЦЕНОВАЯ ПОЛИТИКА', canvas.width/2, y + 40);
-    ctx.font = '16px Arial';
-    ctx.fillText('Мы подберем оптимальные условия для вашего бизнеса', canvas.width/2, y + 65);
-    
-    ctx.fillStyle = orange;
     ctx.font = 'bold 20px Arial';
-    ctx.fillText('СВЯЖИТЕСЬ С НАМИ!', canvas.width/2, y + 100);
+    ctx.fillText('Гибкая ценовая политика', 50, y);
     ctx.font = '16px Arial';
-    ctx.fillText('Будем рады сотрудничеству!', canvas.width/2, y + 125);
+    y += 30;
+    ctx.fillText('Мы подберем оптимальные условия для вашего бизнеса.', 50, y);
     
-    // Company details
+    // Call to action
+    y += 40;
     ctx.fillStyle = blue;
+    ctx.font = 'bold 24px Arial';
+    ctx.fillText('Свяжитесь с нами прямо сейчас!', 50, y);
+    
+    ctx.font = '16px Arial';
+    y += 30;
+    ctx.fillText('+998 90 935 77 69', 50, y);
+    y += 25;
+    ctx.fillText('gellionprimecustoms@gmail.com', 50, y);
+    y += 30;
+    ctx.fillText('Будем рады сотрудничеству!', 50, y);
+    
+    // Footer with orange background
+    ctx.fillStyle = orange;
+    ctx.fillRect(0, canvas.height - 100, canvas.width, 100);
+    
+    ctx.fillStyle = '#ffffff';
     ctx.font = '14px Arial';
-    ctx.fillText('ООО "Gellion Prime"', canvas.width/2, y + 160);
-    ctx.fillText('Toshkent shahri, Mirobod tumani', canvas.width/2, y + 180);
-    ctx.fillText('ИНН: 307235310 | ОКЭД: 52292', canvas.width/2, y + 200);
+    ctx.textAlign = 'left';
+    ctx.fillText('Toshkent shahri, Mirobod tumani OLTINKO\'L 1-TOR KO\'CHASI, QORASU MFY, 15-UY', 50, canvas.height - 70);
+    ctx.fillText('p/c:2020 8000 5051 96893001 в Мирабадский филиал NBU (МФО) 00875', 50, canvas.height - 50);
+    ctx.fillText('ИНН307235310, ОКЭД 52292', 50, canvas.height - 30);
     
     // Convert canvas to blob and download
     canvas.toBlob(function(blob) {

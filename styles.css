@@ -82,21 +82,21 @@ body {
     position: absolute;
     width: 20px;
     height: 20px;
-    border-radius: 4px;
+    border-radius: 2px;
 }
 
 .logo-part.orange {
     background: #ff6b35;
     left: 0;
     top: 0;
-    clip-path: polygon(0 0, 100% 0, 60% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
 }
 
 .logo-part.blue {
     background: #1e3a8a;
     right: 0;
     bottom: 0;
-    clip-path: polygon(40% 0, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
 }
 
 .language-selector {
