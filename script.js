@@ -51,57 +51,50 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Uzbek phone number validation
+// Uzbek phone number validation - accepts various formats
 function validateUzbekPhone(phone) {
     // Remove all non-digit characters except +
     const cleanPhone = phone.replace(/[^\d+]/g, '');
     
-    // Check if it starts with +998
-    if (!cleanPhone.startsWith('+998')) {
+    // If it starts with +, check if it's a valid Uzbek number
+    if (cleanPhone.startsWith('+')) {
+        // Should be +998 followed by 9 digits
+        if (cleanPhone.length === 13 && cleanPhone.startsWith('+998')) {
+            const operatorCode = cleanPhone.substring(4, 6);
+            const validCodes = ['90', '91', '93', '94', '95', '97', '99'];
+            return validCodes.includes(operatorCode);
+        }
         return false;
     }
     
-    // Check if it has the correct length (12 digits after +998)
-    if (cleanPhone.length !== 13) {
-        return false;
+    // If no +, should be 9-12 digits (Uzbek numbers)
+    if (cleanPhone.length >= 9 && cleanPhone.length <= 12) {
+        // Check if it's a valid Uzbek operator code
+        let operatorCode;
+        if (cleanPhone.length === 9) {
+            operatorCode = cleanPhone.substring(0, 2);
+        } else if (cleanPhone.length === 10) {
+            operatorCode = cleanPhone.substring(0, 2);
+        } else if (cleanPhone.length === 11) {
+            operatorCode = cleanPhone.substring(0, 2);
+        } else if (cleanPhone.length === 12) {
+            operatorCode = cleanPhone.substring(0, 2);
+        }
+        
+        const validCodes = ['90', '91', '93', '94', '95', '97', '99'];
+        return validCodes.includes(operatorCode);
     }
     
-    // Check if the operator code is valid (90, 91, 93, 94, 95, 97, 99)
-    const operatorCode = cleanPhone.substring(4, 6);
-    const validOperators = ['90', '91', '93', '94', '95', '97', '99'];
-    
-    if (!validOperators.includes(operatorCode)) {
-        return false;
-    }
-    
-    return true;
+    return false;
 }
 
-// Format phone number as user types
+// Format phone number as user types - no auto-adding +998
 function formatPhoneNumber(input) {
-    let value = input.value.replace(/\D/g, '');
+    let value = input.value;
     
-    if (value.startsWith('998')) {
-        value = '+' + value;
-    } else if (value.startsWith('8')) {
-        value = '+998' + value.substring(1);
-    } else if (value.length > 0 && !value.startsWith('998')) {
-        value = '+998' + value;
-    }
-    
-    // Format as +998 xx xxx xx xx
-    if (value.length > 4) {
-        value = value.substring(0, 4) + ' ' + value.substring(4);
-    }
-    if (value.length > 8) {
-        value = value.substring(0, 8) + ' ' + value.substring(8);
-    }
-    if (value.length > 12) {
-        value = value.substring(0, 12) + ' ' + value.substring(12);
-    }
-    if (value.length > 16) {
-        value = value.substring(0, 16) + ' ' + value.substring(16);
-    }
+    // Don't auto-add +998, let user type freely
+    // Just allow digits, spaces, and + symbol
+    value = value.replace(/[^\d\s+]/g, '');
     
     input.value = value;
 }
@@ -136,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Uzbek phone validation
             if (!validateUzbekPhone(phone)) {
-                showNotification('Пожалуйста, введите корректный узбекский номер телефона (+998 xx xxx xx xx)', 'error');
+                showNotification('Пожалуйста, введите корректный узбекский номер телефона', 'error');
                 return;
             }
             
