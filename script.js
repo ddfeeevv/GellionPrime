@@ -155,16 +155,18 @@ document.addEventListener('DOMContentLoaded', function() {
 // Send form data to Telegram Bot
 function sendToTelegram(name, phone, message) {
     const botToken = '8294746672:AAERdu7nkiXnK-lag1U1rL-O1NamORdGGvs';
-    const chatId = '653776241'; // This should be your personal Telegram user ID
+    const chatId = '653776241'; // Your personal Telegram user ID
     
     const text = `🔔 Новая заявка с сайта Gellion Prime
 
 👤 Имя: ${name}
-📞 Телефон: ${phone}
+📱 Телефон: ${phone}
 💬 Сообщение: ${message}
 
 ⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
-    
+
+    console.log('Sending to Telegram:', { botToken, chatId, text });
+
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
     
     fetch(url, {
@@ -178,19 +180,23 @@ function sendToTelegram(name, phone, message) {
             parse_mode: 'HTML'
         })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Telegram response status:', response.status);
+        return response.json();
+    })
     .then(data => {
+        console.log('Telegram response data:', data);
         if (data.ok) {
             showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
             document.getElementById('contactForm').reset();
         } else {
-            throw new Error('Telegram API error');
+            console.error('Telegram API error:', data);
+            throw new Error(`Telegram API error: ${data.description}`);
         }
     })
     .catch(error => {
         console.error('Error sending to Telegram:', error);
-        // Fallback to email
-        sendToEmail(name, phone, message);
+        showNotification('Ошибка отправки. Попробуйте позже.', 'error');
     });
 }
 
