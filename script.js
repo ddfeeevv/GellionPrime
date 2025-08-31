@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Send form data to Telegram Bot
 function sendToTelegram(name, phone, message) {
-    const botToken = 'YOUR_BOT_TOKEN'; // You'll need to create a Telegram bot
-    const chatId = 'YOUR_CHAT_ID'; // Your Telegram chat ID
+    const botToken = '8294746672:AAERdu7nkiXnK-lag1U1rL-O1NamORdGGvs';
+    const chatId = '653776241';
     
     const text = `🔔 Новая заявка с сайта Gellion Prime
 
