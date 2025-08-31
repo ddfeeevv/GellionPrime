@@ -1,31 +1,4 @@
-// Language switching functionality
-let currentLang = 'ru';
-
-function switchLanguage(lang) {
-    currentLang = lang;
-    
-    // Update language buttons
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
-    
-    // Update all translatable elements
-    document.querySelectorAll('[data-ru][data-uz]').forEach(element => {
-        element.textContent = element.getAttribute(`data-${lang}`);
-    });
-    
-    // Update placeholders
-    document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(element => {
-        const placeholder = element.getAttribute(`data-placeholder-${lang}`);
-        if (placeholder) {
-            element.placeholder = placeholder;
-        }
-    });
-    
-    // Save language preference
-    localStorage.setItem('preferred-language', lang);
-}
+// Simple form validation and submission
 
 // Mobile Navigation Toggle
 document.addEventListener('DOMContentLoaded', function() {
@@ -48,19 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Language selector functionality
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const lang = this.getAttribute('data-lang');
-            switchLanguage(lang);
-        });
-    });
-    
-    // Load saved language preference
-    const savedLang = localStorage.getItem('preferred-language');
-    if (savedLang) {
-        switchLanguage(savedLang);
-    }
+
 });
 
 // Smooth scrolling functions
@@ -169,21 +130,18 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Basic validation
             if (!name || !phone || !message) {
-                const errorMsg = currentLang === 'uz' ? 'Iltimos, barcha maydonlarni to\'ldiring' : 'Пожалуйста, заполните все поля';
-                showNotification(errorMsg, 'error');
+                showNotification('Пожалуйста, заполните все поля', 'error');
                 return;
             }
             
             // Uzbek phone validation
             if (!validateUzbekPhone(phone)) {
-                const errorMsg = currentLang === 'uz' ? 'Iltimos, to\'g\'ri O\'zbekiston telefon raqamini kiriting (+998 xx xxx xx xx)' : 'Пожалуйста, введите корректный узбекский номер телефона (+998 xx xxx xx xx)';
-                showNotification(errorMsg, 'error');
+                showNotification('Пожалуйста, введите корректный узбекский номер телефона (+998 xx xxx xx xx)', 'error');
                 return;
             }
             
             // Show loading message
-            const loadingMsg = currentLang === 'uz' ? 'Arizani yuborish...' : 'Отправляем заявку...';
-            showNotification(loadingMsg, 'info');
+            showNotification('Отправляем заявку...', 'info');
             
             // Send to Telegram Bot (recommended approach)
             sendToTelegram(name, phone, message);
@@ -197,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Send form data to Telegram Bot
 function sendToTelegram(name, phone, message) {
     const botToken = '8294746672:AAERdu7nkiXnK-lag1U1rL-O1NamORdGGvs';
-    const chatId = '653776241';
+    const chatId = '653776241'; // This should be your personal Telegram user ID
     
     const text = `🔔 Новая заявка с сайта Gellion Prime
 
@@ -223,8 +181,7 @@ function sendToTelegram(name, phone, message) {
     .then(response => response.json())
     .then(data => {
         if (data.ok) {
-            const successMsg = currentLang === 'uz' ? 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.' : 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
-            showNotification(successMsg, 'success');
+            showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
             document.getElementById('contactForm').reset();
         } else {
             throw new Error('Telegram API error');
@@ -259,8 +216,7 @@ function sendToEmail(name, phone, message) {
     //     });
     
     // For now, just show success message
-    const successMsg = currentLang === 'uz' ? 'Ariza muvaffaqiyatli yuborildi! Tez orada siz bilan bog\'lanamiz.' : 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
-    showNotification(successMsg, 'success');
+    showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
     document.getElementById('contactForm').reset();
 }
 
