@@ -180,8 +180,8 @@ function sendToTelegram(name, phone, message) {
     .then(data => {
         console.log('Telegram response data:', data);
         if (data.ok) {
-            showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
-            document.getElementById('contactForm').reset();
+            // Перенаправляем на страницу благодарности
+            window.location.href = 'thank-you.html';
         } else {
             console.error('Telegram API error:', data);
             throw new Error(`Telegram API error: ${data.description}`);
@@ -214,9 +214,8 @@ function sendToEmail(name, phone, message) {
     //         console.log('FAILED...', error);
     //     });
     
-    // For now, just show success message
-    showNotification('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.', 'success');
-    document.getElementById('contactForm').reset();
+    // For now, just redirect to thank you page
+    window.location.href = 'thank-you.html';
 }
 
 // Telegram link function
