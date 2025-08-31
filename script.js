@@ -141,6 +141,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Also send to email as backup
             sendToEmail(name, phone, message);
+            
+            // Принудительное перенаправление через 2 секунды
+            setTimeout(() => {
+                console.log('Forced redirect to thank-you.html...');
+                window.location.href = 'thank-you.html';
+            }, 2000);
         });
     }
 });
@@ -181,15 +187,20 @@ function sendToTelegram(name, phone, message) {
         console.log('Telegram response data:', data);
         if (data.ok) {
             // Перенаправляем на страницу благодарности
+            console.log('Redirecting to thank-you.html...');
             window.location.href = 'thank-you.html';
         } else {
             console.error('Telegram API error:', data);
-            throw new Error(`Telegram API error: ${data.description}`);
+            // Даже если Telegram не работает, все равно перенаправляем
+            console.log('Telegram failed, but redirecting anyway...');
+            window.location.href = 'thank-you.html';
         }
     })
     .catch(error => {
         console.error('Error sending to Telegram:', error);
-        showNotification('Ошибка отправки. Попробуйте позже.', 'error');
+        // Даже при ошибке перенаправляем на страницу благодарности
+        console.log('Error occurred, but redirecting to thank-you.html...');
+        window.location.href = 'thank-you.html';
     });
 }
 
@@ -215,7 +226,10 @@ function sendToEmail(name, phone, message) {
     //     });
     
     // For now, just redirect to thank you page
-    window.location.href = 'thank-you.html';
+    console.log('Email fallback - redirecting to thank-you.html...');
+    setTimeout(() => {
+        window.location.href = 'thank-you.html';
+    }, 100);
 }
 
 // Telegram link function
