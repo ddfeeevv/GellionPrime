@@ -94,6 +94,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Telegram link function
+function openTelegram() {
+    window.open('https://t.me/GELLION_PRIME', '_blank');
+}
+
+// Phone link function
+function callPhone() {
+    window.open('tel:+998909357769', '_self');
+}
+
 // Notification system
 function showNotification(message, type = 'info') {
     // Remove existing notifications
