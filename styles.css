@@ -50,54 +50,14 @@ body {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1.5rem;
-    font-weight: 700;
 }
 
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1;
+.logo-image {
+    height: 50px;
+    width: auto;
 }
 
-.logo-gellion {
-    color: #1e3a8a;
-}
 
-.logo-prime {
-    color: #ff6b35;
-}
-
-.logo-symbol {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo-part {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
-}
-
-.logo-part.orange {
-    background: #ff6b35;
-    left: 0;
-    top: 0;
-    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
-}
-
-.logo-part.blue {
-    background: #1e3a8a;
-    right: 0;
-    bottom: 0;
-    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
-}
 
 .language-selector {
     display: flex;
